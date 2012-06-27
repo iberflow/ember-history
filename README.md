@@ -31,5 +31,10 @@ You can also disable the history for a while
 History.disable();
 obj.set('height','300px'); //This won't push a new history state
 History.enable();
-obj.set('height','300px'); //This will now do
+obj.set('height','300px'); //This will
+```
+
+And you can also clear the states
+``` javascript
+History.clear()
 ```
