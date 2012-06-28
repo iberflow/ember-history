@@ -1,7 +1,7 @@
 /**
  *
  * @author Ignas Bernotas (c) 2012
- * @url https://github.com/ignasbernotas
+ * @url http://blog.iber.co.uk/javascript/2012/06/28/emberjs-history-with-undo-redo/
  * @license MIT
  */
 History = {
