@@ -24,7 +24,7 @@ obj2 = Ember.Object.create(Ember.History, {
 obj2.set('name','Matthew');
 obj.set('height','100px');
 obj.set('list', ['item1']);
-obj2.set('surname, 'Parry');
+obj2.set('surname', 'Parry');
 
 History.undo(); // surname is now back to Bernotas
 History.undo(); // list is now back to ['item3','carrot','car']
