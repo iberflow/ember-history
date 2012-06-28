@@ -2,7 +2,7 @@
  *
  * @author Ignas Bernotas (c) 2012
  * @url https://github.com/ignasbernotas
- * 
+ * @license MIT
  */
 History = {
     
