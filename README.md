@@ -2,7 +2,8 @@ ember-history
 =============
 
 Undo / Redo for Emberjs
-Inspired by https://github.com/pangratz/ember-memento, however this implementation is for global History and not for individual objects. Though it doesn't matted how many objects you have it work's with one if you like.
+
+Inspired by https://github.com/pangratz/ember-memento, however my implementation is for global History and not for individual objects (though it works with just one object as well)
 
 
 Usage
@@ -50,3 +51,7 @@ And you can also clear the states
 ``` javascript
 History.clear()
 ```
+
+License
+-------
+This is licensed under MIT. See license.txt
