@@ -16,29 +16,29 @@ History = {
     _isRedo: false,
     _active: true,
     
-    disable: function() {
+    disable() {
         this._active = false;
     },
     
-    enable: function() {
+    enable() {
         this._active = true;
     },
     
-    isActive: function() {
+    isActive() {
         return this._active;
     },
     
     /**
      * Clear all history entries
      */
-    clear: function() {
+    clear() {
         this._states = [];
         this._index = -1;
     },
     /**
      * Push a new history state
      */
-    pushState: function(obj) {
+    pushState(obj) {
         this.clearFuture();
         this._states[this._index+1] = obj;
         this._index++;
@@ -50,13 +50,13 @@ History = {
     /**
      * Update last history state
      */
-    updateLastState: function(value) {
+    updateLastState(value) {
         this._states[this._index].after = value;
     },
     /**
      * This method clears all the states after the current index
      */
-    clearFuture: function() {
+    clearFuture() {
         if(this._index != this._states.length-1) {
             this._states = this._states.slice( 0, this._index +1 );
         }
@@ -64,21 +64,21 @@ History = {
     /**
      * Load state for undo
      */
-    loadUndoState: function(index) {
+    loadUndoState(index) {
         var obj = this._states[index];
         obj.element.set( obj.property, obj.before );
     },
     /**
      * Load state for redo
      */
-    loadRedoState: function(index) {
+    loadRedoState(index) {
         var obj = this._states[index];
         obj.element.set( obj.property, obj.after );
     },
     /**
      * Do undo
      */
-    undo: function() {
+    undo() {
         if(this._index in this._states) {
             this._isUndo = true;
             this.loadUndoState(this._index);
@@ -89,7 +89,7 @@ History = {
     /**
      * Do redo
      */
-    redo: function() {
+    redo() {
         if(this._states[this._index+1]) {
             this._isRedo = true;
             this.loadRedoState(this._index+1);
@@ -97,10 +97,10 @@ History = {
             this._isRedo = false;
         }
     },
-    isUndo: function() {
+    isUndo() {
         return this._isUndo;
     },
-    isRedo: function() {
+    isRedo() {
         return this._isRedo;
     }
 }
@@ -108,26 +108,26 @@ History = {
 Ember.History = Em.Mixin.create({
     
     //Initiate and add observers for the object properties
-    init: function(){
+    init() {
         var props = this.get('_trackProperties');
         var $this = this;
-        props.forEach(function(item) {
+        props.forEach(item => {
             Ember.addBeforeObserver($this, item, $this, '_beforeChange');
             Ember.addObserver($this, item, $this, '_afterChange');
         });
     },
     //The before observer saves adds the element with the value it was before the change
-    _beforeChange: function(element, prop, value) {
+    _beforeChange(element, prop, value) {
         if(!History.isUndo() && !History.isRedo() && History.isActive()) {
             History.pushState({
-                element: element,
+                element,
                 property: prop,
                 before: value
             });
         }
     },
     //This method updates the last state and adds the current value
-    _afterChange: function(element, prop, value) {
+    _afterChange(element, prop, value) {
         if(!History.isUndo() && !History.isRedo() && History.isActive()) {
             History.updateLastState(value);
         }
